@@ -37,4 +37,12 @@ public class MergeSort {
             else lista[f] = aux[i++];
         }
     }
+
+    public static boolean checaOrdenacao(int[] lista){
+        int length = lista.length;
+        for(int i = 0; i < length-1; i++){
+            if(lista[i] < lista[i+1]) return false;
+        }
+        return true;
+    }
 }

@@ -12,11 +12,10 @@ public class File {
     public int[] ler(String file) throws Exception{
         FileReader fr = new FileReader(file);
         Scanner leitor = new Scanner(fr).useDelimiter("\\,|\\n");
-
         while(leitor.hasNext()){
             String data = leitor.next();
             dados.add(Integer.parseInt(data));
         }
-        return dados.stream().mapToInt(i->i).toArray(); //Retorna um array de inteiros a partir de uma linkedlist;
+        return dados.stream().mapToInt(i->i).toArray();
     }
 }

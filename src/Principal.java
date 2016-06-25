@@ -12,8 +12,7 @@ public class Principal {
         boolean menu = true;
 
         File f = new File();
-        //f.ler("./dados/dados.txt");
-        int[] desordenado = f.ler("./dados/teste.txt");
+        int[] desordenado = f.ler("./dados/dados.txt");
         while (menu) {
             System.out.println("Escolha a opção");
             System.out.println("1. Ordenação MergeSort");
@@ -28,6 +27,8 @@ public class Principal {
                     System.out.println("Dados ordenados por MergeSort:");
                     int[] ordenado = MergeSort.sort(desordenado);
                     imprime(ordenado);
+                    boolean isOrdenado = MergeSort.checaOrdenacao(ordenado);
+                    System.out.println(confirmaOrdenacao(isOrdenado));
                 }
                 break;
                 case 2: {
@@ -36,12 +37,24 @@ public class Principal {
                     System.out.println("Dados ordenados por QuickSort:");
                     int[] ordenado = QuickSort.sort(desordenado);
                     imprime(ordenado);
+                    boolean isOrdenado = QuickSort.checaOrdenacao(ordenado);
+                    System.out.println(confirmaOrdenacao(isOrdenado));
+                }
+                break;
+                case 3: {
+                    System.out.println("Dados originais:");
+                    imprime(desordenado);
+                    System.out.println("Dados ordenados por HeapSort:");
+                    int[] ordenado = HeapSort.sort(desordenado, desordenado.length);
+                    imprime(ordenado);
+                    boolean isOrdenado = HeapSort.checaOrdenacao(ordenado);
+                    System.out.println(confirmaOrdenacao(isOrdenado));
                 }
                 break;
                 case 9: {
                     System.out.println("Tchau!");
                     menu = !menu;
-                }
+                }break;
                 default: {
                     System.out.println("Opção inválida!");
                 }
@@ -52,6 +65,11 @@ public class Principal {
 
     public static void imprime(int[] lista){
         System.out.println(Arrays.toString(lista));
+    }
+
+    public static String confirmaOrdenacao(boolean isOrdenado){
+        if(isOrdenado) return "Lista ordenada";
+        return "Lista não ordenada!";
     }
 
 }
