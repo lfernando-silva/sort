@@ -2,46 +2,43 @@
  * Created by Luiz on 19/06/2016.
  */
 public class QuickSort {
+
     public static int[] sort(int[] lista) {
-        sort(lista,0,lista.length-1);
+        sort(lista, 0, lista.length - 1);
         return lista;
     }
 
-    private static boolean sort(int[] lista, int inicio, int fim){
-        if(fim <= inicio) return false;
-        int particao = particiona(lista,inicio,fim);
-        sort(lista,inicio,particao-1);
-        sort(lista,particao+1,fim);
-        return true;
+    private static void sort(int[] lista, int start, int length) {
+        if (length <= start) return;
+        int j = particiona(lista, start, length);
+        sort(lista, start, j - 1);
+        sort(lista, j + 1, length);
     }
 
-    private static int particiona(int[] lista, int inicio, int fim){
-        int i = inicio;
-        int j = fim + 1;
-        int length = lista.length;
-        //int pivo = lista[0] + lista[(length+1)/2] + lista[length-1]; //não funciona, faz o scan pra direita não acontecer
-        int pivo = lista[inicio];
-        while(true){
-            while(lista[++i] > pivo) if(i == fim) break;
-            while(pivo > lista[--j]) if(j == inicio) break;
-            if(i > j) break;
-            troca(lista,i,j);
+    private static int particiona(int[] lista, int start, int length) {
+        int i = start;
+        int j = length + 1;
+        int pivo = lista[start];
+        while (true) {
+            while (lista[++i] < pivo) if (i == length) break;
+            while (pivo < lista[--j]) if (j == start) break;
+            if (i >= j) break;
+            troca(lista, i, j);
         }
-        troca(lista,inicio,j);
+        troca(lista, start, j);
         return j;
     }
 
-    private static void troca(int[] lista, int i, int j)
-    {
-        int trocavel = lista[i];
+    private static void troca(int[] lista, int i, int j) {
+        int t = lista[i];
         lista[i] = lista[j];
-        lista[j] = trocavel;
+        lista[j] = t;
     }
 
-    public static boolean checaOrdenacao(int[] lista){
+    public static boolean checaOrdenacao(int[] lista) {
         int length = lista.length;
-        for(int i = 0; i < length-1; i++){
-            if(lista[i] < lista[i+1]) return false;
+        for (int i = 0; i < length - 1; i++) {
+            if (lista[i] > lista[i + 1]) return false;
         }
         return true;
     }
